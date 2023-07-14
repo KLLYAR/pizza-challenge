@@ -33,6 +33,7 @@ class ScreenAuditControler extends Controller
     }
 
     public function create() {
+        
         $users = User::get();
         return view('register-audit', compact('users'));
     }
@@ -49,6 +50,11 @@ class ScreenAuditControler extends Controller
     }
 
     public function confirmPayment(ScreenAudit $screenAudit) {
+
+        if(!Auth::user()->isAdmin) {
+            return redirect()->back()->with('error', 'Você não é administrador para confirmar pagamentos.');
+        }
+
         $screenAudit->payed_at = Carbon::now();
         $screenAudit->save();
         
