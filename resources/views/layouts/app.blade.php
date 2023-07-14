@@ -7,12 +7,14 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>Pizza Challenge</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.css" />
+  
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.js"></script>
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
@@ -20,8 +22,8 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                <a class="navbar-brand" href="{{ url('/home') }}">
+                Pizza Challenge
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -73,6 +75,20 @@
         </nav>
 
         <main class="py-4">
+            <div class="row justify-content-center">
+                <div class="col-12 col-lg-8">
+                    @if (session('success'))
+                    <div class="alert alert-success mb-5">
+                        {{ session('success') }}
+                    </div>
+                    @elseif(session('error'))
+                        <div class="alert alert-danger mb-5">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+                </div>
+            </div>
+            
             @yield('content')
         </main>
     </div>
