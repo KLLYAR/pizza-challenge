@@ -1,0 +1,41 @@
+version: '3'
+
+networks:
+  laravel:
+    driver: bridge
+
+volumes:
+  db_data: 
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8000:8000'
+    volumes:
+      - .:/var/www/html/pizza_challenge
+    depends_on:
+      - db
+    working_dir: /var/www/html/pizza_challenge
+    command: php artisan serve --host=0.0.0.0 --port=8000
+    networks:
+      - laravel
+
+  db:
+    image: mysql:8.0.2
+    hostname: localhost
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_DATABASE: pizza_challenge
+      MYSQL_USER: root
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - laravel
+
+
