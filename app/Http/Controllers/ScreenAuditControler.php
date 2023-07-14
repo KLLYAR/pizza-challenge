@@ -54,4 +54,14 @@ class ScreenAuditControler extends Controller
         
         return redirect()->back()->with('success', 'Pagamento da Pizza Confirmado.');
     }
+
+    public function show(ScreenAudit $screenAudit) {
+        $screenAudit = ScreenAudit::find($screenAudit->id)->where('payed_at', null)
+            ->with('deptor')
+            ->with('admin')
+            ->first();
+
+        $screenAudit->screenshot_path = URL::asset(Storage::url($screenAudit->screenshot_path));
+        return view('audit-detail', compact('screenAudit'));
+    }
 }   

@@ -25,13 +25,30 @@
                         <thead>
                             <th>Nome</th>
                             <th>Screenshot</th>
+                            <th>Detalhar</th>
+                            <th>Refri?</th>
+                            <th>Data da Dívida</th>
                         </thead>
                         <tbody>
                             @foreach($audits ?? [] as $audit) 
                             <div>
                                 <td>{{ $audit->deptor->name ?? 'John Doe' }}</td>
-                                <td><img src={{ $audit->screenshot_path }} alt=""></td>
+
+                                <td>
+                                    <div class="" style="max-width: 15em;">
+                                        <img src={{ $audit->screenshot_path }} alt="" style="width: 100%;">
+                                    </div>
+                                </td>
+                                
                                 <td>{{ $audit->hasRefri ? 'Deve um Refrigerante' : '' }}</td>
+
+                                <td>
+                                    <a href="/show/{{ $audit->id }}"> Detalhar </a>
+                                </td>
+                                <td>
+                                    {{ $audit->created_at }}
+                                </td>
+
                                 <td>
                                     <form action="/confirm-payment/{{$audit->id}}" method="POST">
                                         @csrf
@@ -52,6 +69,15 @@
 </div>
 @endsection
 
+@push('script')
+    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.js"></script>
+@endpush
+
+@push('script')
 <script>
-    let dad = new Datatable('pendent_pizzas');
+    $(document).ready(function() {
+        console.log("Aoba")
+        $('#pendent_pizzas').DataTable();
+    });
 </script>
+@endpush

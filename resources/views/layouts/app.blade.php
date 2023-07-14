@@ -12,9 +12,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.5/css/jquery.dataTables.css" />
-  
-    <script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.js"></script>
+    
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
@@ -90,6 +88,8 @@
             </div>
             
             @yield('content')
+
+            @stack('script')
         </main>
     </div>
 </body>
