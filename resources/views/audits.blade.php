@@ -31,6 +31,15 @@
                             <div>
                                 <td>{{ $audit->deptor->name ?? 'John Doe' }}</td>
                                 <td><img src={{ $audit->screenshot_path }} alt=""></td>
+                                <td>{{ $audit->hasRefri ? 'Deve um Refrigerante' : '' }}</td>
+                                <td>
+                                    <form action="/confirm-payment/{{$audit->id}}" method="POST">
+                                        @csrf
+                                        <button class="btn btn-success" type="submit">
+                                            Confirmar Pagamento
+                                        </button>
+                                    </form>
+                                </td>
                             </div>
                             @endforeach
                         </tbody>

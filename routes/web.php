@@ -21,3 +21,5 @@ Route::get('/home', [App\Http\Controllers\ScreenAuditControler::class, 'index'])
 Route::get('/create', [App\Http\Controllers\ScreenAuditControler::class, 'create'])->name('audits.create');
 
 Route::post('/store', [App\Http\Controllers\ScreenAuditControler::class, 'store'])->name('audits.store');
+
+Route::post('/confirm-payment/{screenAudit}', [App\Http\Controllers\ScreenAuditControler::class, 'confirmPayment'])->name('audits.confirm_payment');

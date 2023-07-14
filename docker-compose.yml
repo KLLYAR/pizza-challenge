@@ -25,6 +25,7 @@ services:
 
   db:
     image: mysql:8.0.2
+    hostname: localhost
     ports:
       - '3306:3306'
     environment:
